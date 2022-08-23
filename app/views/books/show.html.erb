@@ -1,24 +1,25 @@
 <main>
   <div class="container px-5 px-sm-0">
-    <%= flash[:notice] %>
     <div class="row">
       <!-- ユーザーの詳細 -->
       <div class="col-md-3">
-        <%= render 'users/user_info', user: @user %>
+        <%= render 'users/user_info', user: @book.user %>
         <%= render 'new', book: @book_new %>
       </div>
         <!-- ユーザーの投稿一覧 -->
-      <div calss="col-lg-8 offset-md-1">
+      <div class="col-md-8 offset-md-1">
         <h2>Book detail</h2>
-        <table class="table table-hover table-inverse">
+        <table class="table">
           <tbody>
             <tr>
-              <td><%= image_tag @book.user.get_profile_image(100,100) %><br><%= link_to @book.user.name, user_path(@book.user.id) %></td>
+              <td><%= link_to image_tag(@book.user.get_profile_image(100,100)),user_path(@book.user.id) %>
+                  <br><%= link_to @book.user.name, user_path(@book.user.id) %>
+              </td>
               <td><%= link_to @book.title, book_path(@book.id) %></td>
               <td><%= @book.body %></td>
               <% if @book.user == current_user %>
-                <tb><%= link_to "削除", book_path(@book), method: :delete ,"data-confirm" => "Are you sure？"%></tb>
-                <tb><%= link_to "edit", edit_book_path(@book) %></tb>
+                <td><%= link_to "Edit", edit_book_path(@book) ,class: "btn btn-success"%></tb>
+                <td><%= link_to "Destroy", book_path(@book), method: :delete ,"data-confirm" => "Are you sure？",class: "btn btn-danger"%></tb>
               <% end %>
             </tr>
           </tbody>

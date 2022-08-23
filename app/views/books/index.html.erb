@@ -7,8 +7,9 @@
         <% @book.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
-      </div>
       </ul>
+      </div>
+  
     <% end %>
     <div class="row">
       <!-- ユーザーの詳細 -->
@@ -17,7 +18,7 @@
         <%= render 'new', book: @book %>
       </div>
         <!-- ユーザーの投稿一覧 -->
-      <div calss="col-lg-8 offset-md-1">
+      <div class="col-md-8 offset-md-1">
         <h2>Books</h2>
         <table class="table table-hover table-inverse">
           <thead>
@@ -31,7 +32,7 @@
           <tbody>
             <% @books.each do |book| %>
             <tr>
-              <td><%= image_tag book.user.get_profile_image(100,100) %></td>
+              <td><%= link_to image_tag(book.user.get_profile_image(100,100)),user_path(book.user.id) %></td>
               <td><%= link_to book.title, book_path(book.id) %></td>
               <td><%= book.body %></td>
             </tr>
